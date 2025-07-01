@@ -77,7 +77,7 @@ export default function Navbar() {
               onClick={handleLogout}
               variant="outline"
               size="icon"
-              className="text-text-secondary hover:text-text-accent border-gray-300 hover:border-text-accent bg-transparent"
+              className="text-text-secondary hover:text-text-accent border-0 hover:border-0 bg-transparent hover:bg-gray-100"
               title="Logout"
             >
               <LogOut className="h-4 w-4" />
@@ -90,7 +90,7 @@ export default function Navbar() {
               onClick={handleLogout}
               variant="outline"
               size="icon"
-              className="text-text-secondary hover:text-text-accent border-gray-300 hover:border-text-accent bg-transparent"
+              className="text-text-secondary hover:text-text-accent border-0 hover:border-0 bg-transparent hover:bg-gray-100"
               title="Logout"
             >
               <LogOut className="h-4 w-4" />

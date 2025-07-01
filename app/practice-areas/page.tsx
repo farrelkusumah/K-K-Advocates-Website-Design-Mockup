@@ -133,11 +133,12 @@ export default function PracticeAreasPage() {
       <section
         ref={contentAnimation.ref}
         id="practice-areas-content"
-        className={`py-16 sm:py-20 bg-white transition-all duration-1000 ease-out ${
+        className={`py-16 sm:py-20 transition-all duration-1000 ease-out ${
           contentAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-8 sm:translate-y-12"
         }`}
+        style={{ backgroundColor: "#faf9f6" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {practiceAreas.map((category, categoryIndex) => (

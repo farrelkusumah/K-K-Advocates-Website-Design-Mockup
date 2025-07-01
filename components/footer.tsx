@@ -12,7 +12,10 @@ export default function Footer() {
           <h2 className={`text-2xl sm:text-3xl font-bold text-text-primary mb-6 sm:mb-8 ${ebGaramond.className}`}>
             Need Legal Assistance?
           </h2>
-          <Button className="bg-text-accent hover:bg-primary-700 text-white px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg font-medium transition-all duration-300 ease-out hover:shadow-lg transform hover:-translate-y-1">
+          <Button
+            className="text-white px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg font-medium transition-all duration-300 ease-out hover:shadow-lg transform hover:-translate-y-1"
+            style={{ backgroundColor: "#153d2b" }}
+          >
             Contact Us!
           </Button>
         </div>

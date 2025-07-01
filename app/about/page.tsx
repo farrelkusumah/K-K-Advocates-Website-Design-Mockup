@@ -126,11 +126,12 @@ export default function AboutPage() {
       <section
         ref={aboutContentAnimation.ref}
         id="about-content"
-        className={`py-16 sm:py-20 bg-emerald-50 transition-all duration-1000 ease-out ${
+        className={`py-16 sm:py-20 transition-all duration-1000 ease-out ${
           aboutContentAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-8 sm:translate-y-12"
         }`}
+        style={{ backgroundColor: "#faf9f6" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
@@ -202,11 +203,12 @@ export default function AboutPage() {
       {/* Our Values Section */}
       <section
         ref={valuesAnimation.ref}
-        className={`py-16 sm:py-20 bg-blue-50 transition-all duration-1000 ease-out ${
+        className={`py-16 sm:py-20 transition-all duration-1000 ease-out ${
           valuesAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-8 sm:translate-y-12"
         }`}
+        style={{ backgroundColor: "#eff4f1" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <h2
@@ -250,11 +252,12 @@ export default function AboutPage() {
       {/* Our Approach Section */}
       <section
         ref={approachAnimation.ref}
-        className={`py-16 sm:py-20 bg-amber-50 transition-all duration-1000 ease-out ${
+        className={`py-16 sm:py-20 transition-all duration-1000 ease-out ${
           approachAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-8 sm:translate-y-12"
         }`}
+        style={{ backgroundColor: "#faf9f6" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <h2
