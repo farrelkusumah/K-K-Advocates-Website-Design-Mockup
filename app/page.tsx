@@ -8,6 +8,7 @@ import Footer from "@/components/footer"
 import HeroCarousel from "@/components/hero-carousel"
 import { practiceAreas, latestUpdates } from "@/lib/data"
 import { useHorizontalScroll } from "@/hooks/use-horizontal-scroll"
+import Image from "next/image"
 
 const ebGaramond = EB_Garamond({ subsets: ["latin"] })
 
@@ -48,7 +49,15 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div className="flex justify-center order-2 lg:order-1">
-              <div className="w-full max-w-md h-48 sm:h-64 bg-white rounded-lg shadow-sm"></div>
+              <div className="w-full max-w-md h-48 sm:h-64 relative rounded-lg overflow-hidden shadow-sm">
+                <Image
+                  src="/bg-about-2.jpg"
+                  alt="K&K Advocates Office"
+                  fill
+                  className="object-cover"
+                  crossOrigin="anonymous"
+                />
+              </div>
             </div>
             <div className="order-1 lg:order-2">
               <h2
@@ -90,22 +99,21 @@ export default function HomePage() {
             >
               <div className="flex space-x-4 sm:space-x-6 pb-4" style={{ width: "max-content" }}>
                 {practiceAreas.map((area) => (
-                  <Card
-                    key={area.id}
-                    className="border border-tertiary-200 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-72 sm:w-80 cursor-pointer bg-white"
-                  >
-                    <CardContent className="p-0">
-                      <div className="w-full h-40 sm:h-48 bg-tertiary-300 rounded-t-lg"></div>
-                      <div className="p-4 sm:p-6">
-                        <h3
-                          className={`text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3 ${ebGaramond.className}`}
-                        >
-                          {area.title}
-                        </h3>
-                        <p className="text-text-secondary text-xs sm:text-sm leading-relaxed">{area.description}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <Link key={area.id} href={`/practice-areas/${area.slug}`}>
+                    <Card className="border border-tertiary-200 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-72 sm:w-80 cursor-pointer bg-white">
+                      <CardContent className="p-0">
+                        <div className="w-full h-40 sm:h-48 bg-tertiary-300 rounded-t-lg"></div>
+                        <div className="p-4 sm:p-6">
+                          <h3
+                            className={`text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3 ${ebGaramond.className}`}
+                          >
+                            {area.title}
+                          </h3>
+                          <p className="text-text-secondary text-xs sm:text-sm leading-relaxed">{area.description}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -122,7 +130,7 @@ export default function HomePage() {
             </h2>
             <Link
               href="/insights"
-              className="text-text-accent hover:text-primary-700 font-medium transition-colors text-sm sm:text-base lg:text-lg"
+              className="text-text-accent hover:text-primary-700 hover:font-bold font-medium transition-all text-sm sm:text-base lg:text-lg"
             >
               More Updates...
             </Link>

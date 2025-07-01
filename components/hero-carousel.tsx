@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import type React from "react"
+
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useHorizontalScroll } from "@/hooks/use-horizontal-scroll"
 
 const heroImages = [
   {
@@ -26,7 +27,10 @@ const heroImages = [
 export default function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
-  const scrollRef = useHorizontalScroll()
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // Auto-play functionality
   useEffect(() => {
@@ -57,15 +61,50 @@ export default function HeroCarousel() {
     setTimeout(() => setIsAutoPlaying(true), 10000)
   }
 
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true)
+    setStartX(e.pageX)
+    setScrollLeft(currentSlide)
+    setIsAutoPlaying(false)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+    e.preventDefault()
+    const x = e.pageX
+    const walk = (startX - x) / 100 // Adjust sensitivity
+    const newSlide = Math.round(scrollLeft + walk)
+    if (newSlide >= 0 && newSlide < heroImages.length) {
+      setCurrentSlide(newSlide)
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  const handleMouseLeave = () => {
+    setIsDragging(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
   return (
     <div className="relative w-full h-48 sm:h-64 lg:h-80 overflow-hidden rounded-lg group">
       {/* Images Container */}
       <div
-        ref={scrollRef}
+        ref={containerRef}
         className="flex transition-transform duration-500 ease-in-out h-full cursor-grab active:cursor-grabbing"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
+        onMouseLeave={() => {
+          setIsAutoPlaying(true)
+          handleMouseLeave()
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
       >
         {heroImages.map((image, index) => (
           <div key={image.id} className="w-full h-full flex-shrink-0 relative">
@@ -99,13 +138,13 @@ export default function HeroCarousel() {
         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
 
-      {/* Indicators - Made smaller */}
+      {/* Clickable Indicators */}
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex space-x-1.5">
         {heroImages.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
               index === currentSlide ? "bg-white scale-110" : "bg-white/50 hover:bg-white/75"
             }`}
             aria-label={`Go to slide ${index + 1}`}
