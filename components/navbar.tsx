@@ -1,116 +1,163 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
 import { useState } from "react"
+import Link from "next/link"
 import { Menu, X, LogOut } from "lucide-react"
-import { clearAuthentication } from "./password-protection"
+import { EB_Garamond } from "next/font/google"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
-const navItems = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-  { name: "People", href: "/people" },
-  { name: "Practice Area", href: "/practice-areas" },
-  { name: "Insights", href: "/insights" },
-  { name: "Achievements", href: "/achievements" },
-]
+const ebGaramond = EB_Garamond({ subsets: ["latin"] })
 
 export default function Navbar() {
-  const pathname = usePathname()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleLogout = () => {
-    clearAuthentication()
+    localStorage.removeItem("kk_auth")
     window.location.reload()
   }
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
   return (
-    <header className="bg-white sticky top-0 z-50 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex justify-between items-center py-4">
-          <Link href="/" className="flex items-center">
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          {/* Logo */}
+          <Link href="/" className="flex items-center" onClick={closeMenu}>
             <Image
               src="/logo.png"
               alt="K&K Advocates"
-              width={140}
+              width={120}
               height={48}
               className="h-8 sm:h-10 w-auto"
-              priority
+              crossOrigin="anonymous"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6 lg:space-x-8 items-center">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`font-medium transition-all duration-500 ease-out py-2 relative group ${
-                  pathname === item.href
-                    ? "text-navbar-active font-bold text-[15px]"
-                    : "text-gray-700 hover:text-navbar-active text-sm"
-                }`}
-              >
-                {item.name}
-                {/* Active state line */}
-                {pathname === item.href && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-navbar-active"></div>
-                )}
-                {/* Hover state line with animation */}
-                {pathname !== item.href && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-navbar-active transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-left"></div>
-                )}
-              </Link>
-            ))}
-
-            {/* Logout Button */}
-            <button
+          <div className="hidden md:flex items-center space-x-8 lg:space-x-12">
+            <Link
+              href="/"
+              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+            >
+              About
+            </Link>
+            <Link
+              href="/practice-areas"
+              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+            >
+              Practice Areas
+            </Link>
+            <Link
+              href="/insights"
+              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+            >
+              Insights
+            </Link>
+            <Link
+              href="/contact"
+              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+            >
+              Contact
+            </Link>
+            <Button
               onClick={handleLogout}
-              className="text-gray-700 hover:text-red-600 transition-colors duration-300 p-2 rounded-md hover:bg-red-50"
-              title="Logout"
+              variant="outline"
+              size="sm"
+              className="text-text-secondary hover:text-text-accent border-gray-300 hover:border-text-accent bg-transparent"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              size="sm"
+              className="text-text-secondary hover:text-text-accent border-gray-300 hover:border-text-accent bg-transparent"
             >
               <LogOut className="h-4 w-4" />
+            </Button>
+            <button
+              onClick={toggleMenu}
+              className="text-text-primary hover:text-text-accent transition-colors p-2"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? <X className="h-6 w-6 text-gray-700" /> : <Menu className="h-6 w-6 text-gray-700" />}
-          </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 bg-white">
-            <nav className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`font-medium transition-all duration-500 ease-out ${
-                    pathname === item.href
-                      ? "text-navbar-active font-bold text-[15px]"
-                      : "text-gray-700 hover:text-navbar-active text-sm"
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-
-              {/* Mobile Logout Button */}
-              <button
-                onClick={handleLogout}
-                className="text-gray-700 hover:text-red-600 transition-colors duration-300 text-sm font-medium text-left flex items-center space-x-2"
+        {isOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+              <Link
+                href="/"
+                className="block px-3 py-2 text-text-primary hover:text-text-accent transition-colors font-medium"
+                onClick={closeMenu}
               >
-                <LogOut className="h-4 w-4" />
-                <span>Logout</span>
-              </button>
-            </nav>
+                Home
+              </Link>
+              <Link
+                href="/about"
+                className="block px-3 py-2 text-text-primary hover:text-text-accent transition-colors font-medium"
+                onClick={closeMenu}
+              >
+                About
+              </Link>
+              <Link
+                href="/practice-areas"
+                className="block px-3 py-2 text-text-primary hover:text-text-accent transition-colors font-medium"
+                onClick={closeMenu}
+              >
+                Practice Areas
+              </Link>
+              <Link
+                href="/insights"
+                className="block px-3 py-2 text-text-primary hover:text-text-accent transition-colors font-medium"
+                onClick={closeMenu}
+              >
+                Insights
+              </Link>
+              <Link
+                href="/contact"
+                className="block px-3 py-2 text-text-primary hover:text-text-accent transition-colors font-medium"
+                onClick={closeMenu}
+              >
+                Contact
+              </Link>
+              <div className="px-3 py-2">
+                <Button
+                  onClick={handleLogout}
+                  variant="outline"
+                  size="sm"
+                  className="w-full text-text-secondary hover:text-text-accent border-gray-300 hover:border-text-accent bg-transparent"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              </div>
+            </div>
           </div>
         )}
       </div>
-    </header>
+    </nav>
   )
 }

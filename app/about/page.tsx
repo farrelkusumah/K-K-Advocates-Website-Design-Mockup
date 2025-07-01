@@ -79,7 +79,7 @@ export default function AboutPage() {
       {/* Hero Section - Full Viewport Height with centered content */}
       <section
         ref={heroAnimation.ref}
-        className={`h-screen flex flex-col justify-center items-center bg-slate-50 relative transition-all duration-1000 ease-out ${
+        className={`h-screen flex flex-col justify-center items-center bg-white relative transition-all duration-1000 ease-out ${
           heroAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-4 sm:translate-y-8"

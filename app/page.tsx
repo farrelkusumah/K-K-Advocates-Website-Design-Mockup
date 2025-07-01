@@ -19,18 +19,21 @@ const practiceAreaCategories = [
     id: 1,
     title: "Intellectual Property",
     description: "Comprehensive IP protection including patents, trademarks, copyrights, and trade secrets.",
+    image: "https://www.kk-advocates.com/lib/template/kkadvocates/img/thumb1.jpg",
     link: "/practice-areas",
   },
   {
     id: 2,
     title: "Corporate & Technology",
     description: "Corporate law, M&A, technology transactions, and regulatory compliance.",
+    image: "https://www.kk-advocates.com/lib/template/kkadvocates/img/thumb2.jpg",
     link: "/practice-areas",
   },
   {
     id: 3,
     title: "Dispute Resolution",
     description: "Litigation, arbitration, and alternative dispute resolution services.",
+    image: "https://www.kk-advocates.com/lib/template/kkadvocates/img/thumb3.jpg",
     link: "/practice-areas",
   },
 ]
@@ -58,7 +61,7 @@ export default function HomePage() {
       {/* Hero Section - Full Viewport Height with centered content */}
       <section
         ref={heroAnimation.ref}
-        className={`h-screen flex items-center justify-center bg-slate-50 transition-all duration-1000 ease-out ${
+        className={`h-screen flex items-center justify-center bg-white transition-all duration-1000 ease-out ${
           heroAnimation.isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
         }`}
       >
@@ -146,7 +149,7 @@ export default function HomePage() {
       {/* Practice Areas Section */}
       <section
         ref={practiceAreasAnimation.ref}
-        className={`py-16 sm:py-20 bg-[] transition-all duration-1000 ease-out ${
+        className={`py-16 sm:py-20 bg-blue-50 transition-all duration-1000 ease-out ${
           practiceAreasAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-12"
@@ -179,7 +182,15 @@ export default function HomePage() {
               <Link key={area.id} href={area.link}>
                 <Card className="bg-white border border-gray-200 shadow-lg cursor-pointer h-full">
                   <CardContent className="p-0">
-                    <div className="w-full h-40 sm:h-48 bg-gray-300 rounded-t-lg"></div>
+                    <div className="w-full h-40 sm:h-48 relative rounded-t-lg overflow-hidden">
+                      <Image
+                        src={area.image || "/placeholder.svg"}
+                        alt={area.title}
+                        fill
+                        className="object-cover"
+                        crossOrigin="anonymous"
+                      />
+                    </div>
                     <div className="p-4 sm:p-6">
                       <h3
                         className={`text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3 ${ebGaramond.className}`}
@@ -187,7 +198,9 @@ export default function HomePage() {
                         {area.title}
                       </h3>
                       <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-3">{area.description}</p>
-                      <p className="text-text-accent text-xs sm:text-sm font-medium hover:font-bold transition-all duration-200 ease-out">Read more ...</p>
+                      <p className="text-text-accent text-xs sm:text-sm font-medium hover:font-bold transition-all duration-200 ease-out">
+                        Read more ...
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
@@ -239,7 +252,14 @@ export default function HomePage() {
                       className="bg-white border border-tertiary-200 shadow-lg hover:shadow-xl transition-all duration-500 ease-out flex-shrink-0 w-72 sm:w-80 group hover:scale-105 hover:-translate-y-2"
                     >
                       <CardContent className="p-0">
-                        <div className="w-full h-24 sm:h-32 bg-gray-100 rounded-t-lg border-b border-tertiary-200 relative">
+                        <div className="w-full h-24 sm:h-32 relative rounded-t-lg border-b border-tertiary-200 overflow-hidden">
+                          <Image
+                            src={update.image || "/placeholder.svg"}
+                            alt={update.title}
+                            fill
+                            className="object-cover"
+                            crossOrigin="anonymous"
+                          />
                           {/* Date overlay on photo */}
                           <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded px-2 py-1 text-center transition-all duration-300 ease-out group-hover:bg-white group-hover:shadow-md">
                             <div className="text-lg font-bold text-text-primary leading-none">{day}</div>

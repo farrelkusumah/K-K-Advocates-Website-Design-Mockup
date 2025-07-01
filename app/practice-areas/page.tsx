@@ -6,6 +6,7 @@ import Footer from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import Image from "next/image"
 
 const ebGaramond = EB_Garamond({ subsets: ["latin"] })
 
@@ -13,29 +14,53 @@ const practiceAreas = [
   {
     category: "Intellectual Property",
     items: [
-      { id: "prosecution", title: "Prosecution", link: "/practice-areas/prosecution" },
+      {
+        id: "prosecution",
+        title: "Prosecution",
+        link: "/practice-areas/prosecution",
+        image: "https://www.kk-advocates.com//lib/blog/1603299535.jpg",
+      },
       {
         id: "litigation-enforcement",
         title: "Litigation & Enforcement",
         link: "/practice-areas/litigation-enforcement",
+        image: "https://www.kk-advocates.com//lib/blog/1603299701.jpg",
       },
-      { id: "commercial", title: "Commercial", link: "/practice-areas/commercial" },
+      {
+        id: "commercial",
+        title: "Commercial",
+        link: "/practice-areas/commercial",
+        image: "https://www.kk-advocates.com//lib/blog/1603343648.jpg",
+      },
     ],
   },
   {
     category: "Corporate & Technology",
     items: [
-      { id: "general-corporate", title: "General Corporate", link: "/practice-areas/general-corporate" },
+      {
+        id: "general-corporate",
+        title: "General Corporate",
+        link: "/practice-areas/general-corporate",
+        image: "https://www.kk-advocates.com//lib/blog/1603344205.jpg",
+      },
       {
         id: "technology-media-telecom",
         title: "Technology, Media, and Telecommunication",
         link: "/practice-areas/technology-media-telecom",
+        image: "https://www.kk-advocates.com//lib/blog/1603344248.jpg",
       },
     ],
   },
   {
     category: "Dispute Resolution",
-    items: [{ id: "dispute-resolution", title: "Dispute Resolution", link: "/practice-areas/dispute-resolution" }],
+    items: [
+      {
+        id: "dispute-resolution",
+        title: "Dispute Resolution",
+        link: "/practice-areas/dispute-resolution",
+        image: "https://www.kk-advocates.com//lib/blog/1603344293.jpg",
+      },
+    ],
   },
 ]
 
@@ -61,7 +86,7 @@ export default function PracticeAreasPage() {
       {/* Hero Section */}
       <section
         ref={heroAnimation.ref}
-        className={`h-screen flex flex-col justify-center items-center bg-slate-50 relative transition-all duration-1000 ease-out ${
+        className={`h-screen flex flex-col justify-center items-center bg-white relative transition-all duration-1000 ease-out ${
           heroAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-4 sm:translate-y-8"
@@ -151,7 +176,15 @@ export default function PracticeAreasPage() {
                       style={{ transitionDelay: `${500 + categoryIndex * 200 + itemIndex * 100}ms` }}
                     >
                       <CardContent className="p-0">
-                        <div className="w-full h-32 sm:h-40 bg-gray-300 rounded-t-lg"></div>
+                        <div className="w-full h-32 sm:h-40 relative rounded-t-lg overflow-hidden">
+                          <Image
+                            src={item.image || "/placeholder.svg"}
+                            alt={item.title}
+                            fill
+                            className="object-cover"
+                            crossOrigin="anonymous"
+                          />
+                        </div>
                         <div className="p-4 sm:p-6">
                           <h3 className={`text-lg sm:text-xl font-bold text-text-primary mb-2 ${ebGaramond.className}`}>
                             {item.title}
