@@ -3,6 +3,7 @@ export interface PracticeArea {
   title: string
   description: string
   image: string
+  slug: string
 }
 
 export interface Update {
@@ -20,36 +21,42 @@ export const practiceAreas: PracticeArea[] = [
     title: "Intellectual Property",
     description: "Comprehensive IP protection including patents, trademarks, copyrights, and trade secrets.",
     image: "/placeholder.svg?height=200&width=300",
+    slug: "intellectual-property",
   },
   {
     id: 2,
     title: "Corporate & Technology",
     description: "Corporate law, M&A, technology transactions, and regulatory compliance.",
     image: "/placeholder.svg?height=200&width=300",
+    slug: "corporate-technology",
   },
   {
     id: 3,
     title: "Dispute Resolution",
     description: "Litigation, arbitration, and alternative dispute resolution services.",
     image: "/placeholder.svg?height=200&width=300",
+    slug: "dispute-resolution",
   },
   {
     id: 4,
     title: "Employment Law",
     description: "Employment contracts, workplace policies, and labor dispute resolution.",
     image: "/placeholder.svg?height=200&width=300",
+    slug: "employment-law",
   },
   {
     id: 5,
     title: "Data Privacy",
     description: "GDPR compliance, data protection strategies, and privacy policy development.",
     image: "/placeholder.svg?height=200&width=300",
+    slug: "data-privacy",
   },
   {
     id: 6,
     title: "International Trade",
     description: "Cross-border transactions, trade regulations, and international business law.",
     image: "/placeholder.svg?height=200&width=300",
+    slug: "international-trade",
   },
 ]
 
