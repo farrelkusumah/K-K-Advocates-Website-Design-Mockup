@@ -4,7 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, LogOut } from "lucide-react"
+import { clearAuthentication } from "./password-protection"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -18,6 +19,11 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const handleLogout = () => {
+    clearAuthentication()
+    window.location.reload()
+  }
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
@@ -35,7 +41,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6 lg:space-x-8">
+          <nav className="hidden md:flex space-x-6 lg:space-x-8 items-center">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -57,6 +63,15 @@ export default function Navbar() {
                 )}
               </Link>
             ))}
+
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="text-gray-700 hover:text-red-600 transition-colors duration-300 p-2 rounded-md hover:bg-red-50"
+              title="Logout"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -83,6 +98,15 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
+
+              {/* Mobile Logout Button */}
+              <button
+                onClick={handleLogout}
+                className="text-gray-700 hover:text-red-600 transition-colors duration-300 text-sm font-medium text-left flex items-center space-x-2"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Logout</span>
+              </button>
             </nav>
           </div>
         )}
