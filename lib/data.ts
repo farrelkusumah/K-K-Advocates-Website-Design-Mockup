@@ -67,7 +67,7 @@ export const latestUpdates: Update[] = [
     excerpt:
       "We are pleased to announce that K&K Advocates has been recognized in Hukumonline's Practice Leaders 2025 and listed among the Top 100 Indonesian Law Firms 2025.",
     date: "June 23, 2025",
-    image: "https://www.kk-advocates.com/lib/blog/1750691902.jpg",
+    image: "/latest-update-1.jpg",
     slug: "hukumonline-practice-leaders-2025",
   },
   {
@@ -76,7 +76,7 @@ export const latestUpdates: Update[] = [
     excerpt:
       "Understanding the prohibition of surcharge fees in non-cash payment methods and its implications for businesses.",
     date: "June 17, 2025",
-    image: "https://www.kk-advocates.com/lib/blog/1750171259.jpg",
+    image: "/latest-update-2.jpg",
     slug: "larangan-biaya-surcharge-pembayaran-non-tunai",
   },
   {
@@ -85,7 +85,7 @@ export const latestUpdates: Update[] = [
     excerpt:
       "Our firm and practitioners have been recognized in IP STARS 2025 for excellence in intellectual property law.",
     date: "June 9, 2025",
-    image: "https://www.kk-advocates.com/lib/blog/1749462903.jpg",
+    image: "/latest-update-3.jpg",
     slug: "ip-stars-2025-recognition",
   },
   {
@@ -93,7 +93,7 @@ export const latestUpdates: Update[] = [
     title: "K&K Advocates and Three Practitioners Recognized in IAM Patent 1000 2025",
     excerpt: "We are honored to be recognized in IAM Patent 1000 2025 along with three of our leading practitioners.",
     date: "June 9, 2025",
-    image: "https://www.kk-advocates.com/lib/blog/1749462816.jpg",
+    image: "/latest-update-4.jpg",
     slug: "iam-patent-1000-2025",
   },
   {
@@ -102,7 +102,7 @@ export const latestUpdates: Update[] = [
     excerpt:
       "Analysis of Indonesia's position on the Priority Watch List and ongoing intellectual property challenges.",
     date: "May 21, 2025",
-    image: "https://www.kk-advocates.com/lib/blog/1646740863.jpg",
+    image: "/latest-update-5.jpg",
     slug: "indonesia-priority-watch-list-ip-issues",
   },
   {
@@ -111,7 +111,7 @@ export const latestUpdates: Update[] = [
     excerpt:
       "The U.S. Chamber of Commerce recognizes Indonesia's efforts in strengthening intellectual property law enforcement.",
     date: "May 5, 2025",
-    image: "https://www.kk-advocates.com/lib/blog/1653362616.jpg",
+    image: "/latest-update-6.jpg",
     slug: "us-chamber-praises-indonesia-ip-enforcement",
   },
 ]
