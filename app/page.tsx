@@ -134,7 +134,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/about"
-                className="text-text-accent hover:text-primary-700 font-medium transition-all duration-500 ease-out text-sm sm:text-base lg:text-lg hover:underline"
+                className="text-text-accent hover:text-primary-700 font-medium transition-all duration-500 ease-out text-sm sm:text-base lg:text-lg hover:font-bold"
               >
                 read more...
               </Link>
@@ -146,7 +146,7 @@ export default function HomePage() {
       {/* Practice Areas Section */}
       <section
         ref={practiceAreasAnimation.ref}
-        className={`py-16 sm:py-20 bg-blue-50 transition-all duration-1000 ease-out ${
+        className={`py-16 sm:py-20 bg-[] transition-all duration-1000 ease-out ${
           practiceAreasAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-12"
@@ -187,7 +187,7 @@ export default function HomePage() {
                         {area.title}
                       </h3>
                       <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-3">{area.description}</p>
-                      <p className="text-text-accent text-xs sm:text-sm font-medium">Read more ...</p>
+                      <p className="text-text-accent text-xs sm:text-sm font-medium hover:font-bold transition-all duration-200 ease-out">Read more ...</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -236,7 +236,7 @@ export default function HomePage() {
                   return (
                     <Card
                       key={update.id}
-                      className="bg-white border border-tertiary-200 shadow-lg hover:shadow-xl transition-all duration-500 ease-out flex-shrink-0 w-72 sm:w-80 cursor-pointer group hover:scale-105 hover:-translate-y-2"
+                      className="bg-white border border-tertiary-200 shadow-lg hover:shadow-xl transition-all duration-500 ease-out flex-shrink-0 w-72 sm:w-80 group hover:scale-105 hover:-translate-y-2"
                     >
                       <CardContent className="p-0">
                         <div className="w-full h-24 sm:h-32 bg-gray-100 rounded-t-lg border-b border-tertiary-200 relative">

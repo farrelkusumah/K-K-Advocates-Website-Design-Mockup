@@ -63,10 +63,10 @@ export const practiceAreas: PracticeArea[] = [
 export const latestUpdates: Update[] = [
   {
     id: 1,
-    title: "New IP Regulations in Indonesia",
-    excerpt: "Understanding the latest changes in intellectual property law and their impact on businesses.",
+    title: "K&K Advocates Recognized in Hukumonline’s 2025 Practice Leaders and Top 100 Indonesian Law Firms",
+    excerpt: "We are pleased to announce that K&K Advocates has been recognized in Hukumonline’s Practice Leaders 2025 and listed among the Top 100 Indonesian Law Firms 2025.",
     date: "December 15, 2024",
-    image: "/placeholder.svg?height=150&width=250",
+    image: "https://www.kk-advocates.com/lib/blog/1750691902.jpg",
     slug: "new-ip-regulations-indonesia",
   },
   {
