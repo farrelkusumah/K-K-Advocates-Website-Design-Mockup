@@ -280,7 +280,7 @@ export default function HomePage() {
                             {update.excerpt}
                           </p>
                           <Link
-                            href={`/insights/${update.link}`}
+                            href={`${update.link}`}
                             className="text-text-accent hover:text-primary-700 text-xs sm:text-sm font-medium transition-all duration-500 ease-out hover:underline"
                           >
                             Read more...
