@@ -96,7 +96,7 @@ export default function PracticeAreaDetailPage({ params }: PageProps) {
       {/* Clients & Capabilities Section */}
       <section
         ref={capabilitiesAnimation.ref}
-        className={`py-16 sm:py-20 bg-gray-50 transition-all duration-1000 ease-out ${
+        className={`py-16 sm:py-20 bg-white transition-all duration-1000 ease-out ${
           capabilitiesAnimation.isVisible
             ? "opacity-100 transform translate-y-0"
             : "opacity-0 transform translate-y-8 sm:translate-y-12"

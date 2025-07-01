@@ -76,11 +76,11 @@ export default function Navbar() {
             <Button
               onClick={handleLogout}
               variant="outline"
-              size="sm"
+              size="icon"
               className="text-text-secondary hover:text-text-accent border-gray-300 hover:border-text-accent bg-transparent"
+              title="Logout"
             >
-              <LogOut className="h-4 w-4 mr-2" />
-              Logout
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
 
@@ -89,8 +89,9 @@ export default function Navbar() {
             <Button
               onClick={handleLogout}
               variant="outline"
-              size="sm"
+              size="icon"
               className="text-text-secondary hover:text-text-accent border-gray-300 hover:border-text-accent bg-transparent"
+              title="Logout"
             >
               <LogOut className="h-4 w-4" />
             </Button>

@@ -228,7 +228,7 @@ export default function AboutPage() {
             {values.map((value, index) => (
               <Card
                 key={value.id}
-                className={`bg-white border-0 shadow-lg text-center transition-all duration-1000 ease-out hover:shadow-xl hover:scale-105 ${
+                className={`bg-white border-0 shadow-lg text-center transition-all duration-1000 ease-out ${
                   valuesAnimation.isVisible
                     ? "opacity-100 transform translate-y-0"
                     : "opacity-0 transform translate-y-4 sm:translate-y-8"
