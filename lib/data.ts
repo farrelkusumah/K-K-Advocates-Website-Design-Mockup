@@ -13,6 +13,7 @@ export interface Update {
   date: string
   image: string
   slug: string
+  link?: string // Optional for updates that may not have an external link
 }
 
 export const practiceAreas: PracticeArea[] = [
@@ -69,6 +70,7 @@ export const latestUpdates: Update[] = [
     date: "June 23, 2025",
     image: "/latest-update-1.jpg",
     slug: "hukumonline-practice-leaders-2025",
+    link:"https://www.kk-advocates.com/news/read/kk-advocates-hukumonline-2025-top-law-firm-recognition"
   },
   {
     id: 2,
@@ -78,6 +80,7 @@ export const latestUpdates: Update[] = [
     date: "June 17, 2025",
     image: "/latest-update-2.jpg",
     slug: "larangan-biaya-surcharge-pembayaran-non-tunai",
+    link: "https://www.kk-advocates.com/news/read/larangan-biaya-surcharge-pembayaran-non-tunai"
   },
   {
     id: 3,
@@ -87,6 +90,7 @@ export const latestUpdates: Update[] = [
     date: "June 9, 2025",
     image: "/latest-update-3.jpg",
     slug: "ip-stars-2025-recognition",
+    link: "https://www.kk-advocates.com/news/read/kk-advocates-ip-stars-2025-trademark-patent-copyright-awards"
   },
   {
     id: 4,
@@ -95,6 +99,7 @@ export const latestUpdates: Update[] = [
     date: "June 9, 2025",
     image: "/latest-update-4.jpg",
     slug: "iam-patent-1000-2025",
+    link : "https://www.kk-advocates.com/news/read/kk-advocates-recognized-iam-patent-1000-2025"
   },
   {
     id: 5,
@@ -104,6 +109,7 @@ export const latestUpdates: Update[] = [
     date: "May 21, 2025",
     image: "/latest-update-5.jpg",
     slug: "indonesia-priority-watch-list-ip-issues",
+    link: "https://www.kk-advocates.com/news/read/indonesia-priority-watch-list-intellectual-property-issues-2025"
   },
   {
     id: 6,
@@ -113,5 +119,6 @@ export const latestUpdates: Update[] = [
     date: "May 5, 2025",
     image: "/latest-update-6.jpg",
     slug: "us-chamber-praises-indonesia-ip-enforcement",
+    link : "https://www.kk-advocates.com/news/read/us-chamber-praises-indonesia-intellectual-property-law-enforcements"
   },
 ]
