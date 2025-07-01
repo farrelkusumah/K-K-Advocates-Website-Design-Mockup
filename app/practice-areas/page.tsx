@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const ebGaramond = EB_Garamond({ subsets: ["latin"] })
 
@@ -39,6 +40,10 @@ const practiceAreas = [
 ]
 
 export default function PracticeAreasPage() {
+  // Scroll animations
+  const heroAnimation = useScrollAnimation(0.1)
+  const contentAnimation = useScrollAnimation(0.2)
+
   const scrollToContent = () => {
     const contentSection = document.getElementById("practice-areas-content")
     if (contentSection) {
@@ -54,9 +59,22 @@ export default function PracticeAreasPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="h-screen flex flex-col justify-center items-center bg-slate-50 relative">
+      <section
+        ref={heroAnimation.ref}
+        className={`h-screen flex flex-col justify-center items-center bg-slate-50 relative transition-all duration-1000 ease-out ${
+          heroAnimation.isVisible
+            ? "opacity-100 transform translate-y-0"
+            : "opacity-0 transform translate-y-4 sm:translate-y-8"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center flex-1 flex items-center">
-          <div className="w-full">
+          <div
+            className={`w-full transition-all duration-1200 ease-out delay-300 ${
+              heroAnimation.isVisible
+                ? "opacity-100 transform translate-y-0"
+                : "opacity-0 transform translate-y-4 sm:translate-y-8"
+            }`}
+          >
             <h1
               className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6 sm:mb-8 ${ebGaramond.className}`}
             >
@@ -70,7 +88,13 @@ export default function PracticeAreasPage() {
         </div>
 
         {/* Scroll down indicator */}
-        <div className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2">
+        <div
+          className={`absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 transition-all duration-1000 ease-out delay-700 ${
+            heroAnimation.isVisible
+              ? "opacity-100 transform translate-y-0"
+              : "opacity-0 transform translate-y-2 sm:translate-y-4"
+          }`}
+        >
           <button
             onClick={scrollToContent}
             className="text-text-accent hover:text-primary-700 font-medium transition-colors text-sm sm:text-base"
@@ -81,10 +105,26 @@ export default function PracticeAreasPage() {
       </section>
 
       {/* Practice Areas Content */}
-      <section id="practice-areas-content" className="py-16 sm:py-20 bg-white">
+      <section
+        ref={contentAnimation.ref}
+        id="practice-areas-content"
+        className={`py-16 sm:py-20 bg-white transition-all duration-1000 ease-out ${
+          contentAnimation.isVisible
+            ? "opacity-100 transform translate-y-0"
+            : "opacity-0 transform translate-y-8 sm:translate-y-12"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           {practiceAreas.map((category, categoryIndex) => (
-            <div key={category.category} className="mb-16 sm:mb-20">
+            <div
+              key={category.category}
+              className={`mb-16 sm:mb-20 transition-all duration-1000 ease-out ${
+                contentAnimation.isVisible
+                  ? "opacity-100 transform translate-y-0"
+                  : "opacity-0 transform translate-y-4 sm:translate-y-8"
+              }`}
+              style={{ transitionDelay: `${300 + categoryIndex * 200}ms` }}
+            >
               <h2
                 className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary text-center mb-8 sm:mb-12 ${ebGaramond.className}`}
               >
@@ -100,9 +140,16 @@ export default function PracticeAreasPage() {
                       : "grid-cols-1 max-w-md mx-auto"
                 }`}
               >
-                {category.items.map((item) => (
+                {category.items.map((item, itemIndex) => (
                   <Link key={item.id} href={item.link}>
-                    <Card className="bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-shadow cursor-pointer h-full">
+                    <Card
+                      className={`bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-500 ease-out cursor-pointer h-full hover:scale-105 hover:-translate-y-2 ${
+                        contentAnimation.isVisible
+                          ? "opacity-100 transform translate-y-0"
+                          : "opacity-0 transform translate-y-4 sm:translate-y-8"
+                      }`}
+                      style={{ transitionDelay: `${500 + categoryIndex * 200 + itemIndex * 100}ms` }}
+                    >
                       <CardContent className="p-0">
                         <div className="w-full h-32 sm:h-40 bg-gray-300 rounded-t-lg"></div>
                         <div className="p-4 sm:p-6">

@@ -40,15 +40,20 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-colors py-2 relative ${
+                className={`font-medium transition-all duration-500 ease-out py-2 relative group ${
                   pathname === item.href
                     ? "text-navbar-active font-bold text-[15px]"
                     : "text-gray-700 hover:text-navbar-active text-sm"
                 }`}
               >
                 {item.name}
+                {/* Active state line */}
                 {pathname === item.href && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-navbar-active"></div>
+                )}
+                {/* Hover state line with animation */}
+                {pathname !== item.href && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-navbar-active transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-left"></div>
                 )}
               </Link>
             ))}
@@ -68,7 +73,7 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium transition-colors ${
+                  className={`font-medium transition-all duration-500 ease-out ${
                     pathname === item.href
                       ? "text-navbar-active font-bold text-[15px]"
                       : "text-gray-700 hover:text-navbar-active text-sm"

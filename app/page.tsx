@@ -6,25 +6,69 @@ import { EB_Garamond } from "next/font/google"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import HeroCarousel from "@/components/hero-carousel"
-import { practiceAreas, latestUpdates } from "@/lib/data"
+import { latestUpdates } from "@/lib/data"
 import { useHorizontalScroll } from "@/hooks/use-horizontal-scroll"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import Image from "next/image"
 
 const ebGaramond = EB_Garamond({ subsets: ["latin"] })
 
+// Simplified practice areas - only categories
+const practiceAreaCategories = [
+  {
+    id: 1,
+    title: "Intellectual Property",
+    description: "Comprehensive IP protection including patents, trademarks, copyrights, and trade secrets.",
+    link: "/practice-areas",
+  },
+  {
+    id: 2,
+    title: "Corporate & Technology",
+    description: "Corporate law, M&A, technology transactions, and regulatory compliance.",
+    link: "/practice-areas",
+  },
+  {
+    id: 3,
+    title: "Dispute Resolution",
+    description: "Litigation, arbitration, and alternative dispute resolution services.",
+    link: "/practice-areas",
+  },
+]
+
 export default function HomePage() {
-  const practiceAreasScrollRef = useHorizontalScroll()
   const updatesScrollRef = useHorizontalScroll()
+
+  // Scroll animations
+  const heroAnimation = useScrollAnimation(0.1)
+  const aboutAnimation = useScrollAnimation(0.2)
+  const practiceAreasAnimation = useScrollAnimation(0.2)
+  const updatesAnimation = useScrollAnimation(0.2)
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    const day = date.getDate().toString()
+    const month = date.toLocaleDateString("en-US", { month: "short" }).toUpperCase()
+    return { day, month }
+  }
 
   return (
     <div className="min-h-screen">
       <Navbar />
 
       {/* Hero Section - Full Viewport Height with centered content */}
-      <section className="h-screen flex items-center justify-center bg-slate-50">
+      <section
+        ref={heroAnimation.ref}
+        className={`h-screen flex items-center justify-center bg-slate-50 transition-all duration-1000 ease-out ${
+          heroAnimation.isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center w-full">
-            <div className="text-center lg:text-left">
+            <div
+              className={`text-center lg:text-left transition-all duration-1200 ease-out delay-300 ${
+                heroAnimation.isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform -translate-x-8"
+              }`}
+            >
               <h1
                 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight mb-4 sm:mb-6 lg:mb-8 ${ebGaramond.className}`}
               >
@@ -37,7 +81,11 @@ export default function HomePage() {
                 across borders
               </p>
             </div>
-            <div className="flex justify-center">
+            <div
+              className={`flex justify-center transition-all duration-1200 ease-out delay-500 ${
+                heroAnimation.isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform translate-x-8"
+              }`}
+            >
               <HeroCarousel />
             </div>
           </div>
@@ -45,21 +93,35 @@ export default function HomePage() {
       </section>
 
       {/* About Us Section */}
-      <section className="py-16 sm:py-20 bg-emerald-50">
+      <section
+        ref={aboutAnimation.ref}
+        className={`py-16 sm:py-20 bg-emerald-50 transition-all duration-1000 ease-out ${
+          aboutAnimation.isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-12"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-            <div className="flex justify-center order-2 lg:order-1">
-              <div className="w-full max-w-md h-48 sm:h-64 relative rounded-lg overflow-hidden shadow-sm">
+            <div
+              className={`flex justify-center order-2 lg:order-1 transition-all duration-1200 ease-out delay-300 ${
+                aboutAnimation.isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform -translate-x-8"
+              }`}
+            >
+              <div className="w-full max-w-md h-48 sm:h-64 relative rounded-lg overflow-hidden shadow-sm bg-white flex items-center justify-center">
                 <Image
-                  src="/bg-about-2.jpg"
-                  alt="K&K Advocates Office"
-                  fill
-                  className="object-cover"
+                  src="/logo.png"
+                  alt="K&K Advocates"
+                  width={200}
+                  height={80}
+                  className="h-16 sm:h-20 w-auto"
                   crossOrigin="anonymous"
                 />
               </div>
             </div>
-            <div className="order-1 lg:order-2">
+            <div
+              className={`order-1 lg:order-2 transition-all duration-1200 ease-out delay-500 ${
+                aboutAnimation.isVisible ? "opacity-100 transform translate-x-0" : "opacity-0 transform translate-x-8"
+              }`}
+            >
               <h2
                 className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary mb-4 sm:mb-6 ${ebGaramond.className}`}
               >
@@ -72,7 +134,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/about"
-                className="text-text-accent hover:text-primary-700 font-medium transition-colors text-sm sm:text-base lg:text-lg"
+                className="text-text-accent hover:text-primary-700 font-medium transition-all duration-500 ease-out text-sm sm:text-base lg:text-lg hover:underline"
               >
                 read more...
               </Link>
@@ -82,93 +144,129 @@ export default function HomePage() {
       </section>
 
       {/* Practice Areas Section */}
-      <section className="py-16 sm:py-20 bg-blue-50">
+      <section
+        ref={practiceAreasAnimation.ref}
+        className={`py-16 sm:py-20 bg-blue-50 transition-all duration-1000 ease-out ${
+          practiceAreasAnimation.isVisible
+            ? "opacity-100 transform translate-y-0"
+            : "opacity-0 transform translate-y-12"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-          <Link href="/practice-areas" className="block mb-8 sm:mb-12 group">
+          <Link
+            href="/practice-areas"
+            className={`block mb-8 sm:mb-12 group transition-all duration-1000 ease-out delay-300 ${
+              practiceAreasAnimation.isVisible
+                ? "opacity-100 transform translate-y-0"
+                : "opacity-0 transform translate-y-8"
+            }`}
+          >
             <h2
-              className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary group-hover:text-text-accent transition-colors ${ebGaramond.className}`}
+              className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary group-hover:text-text-accent transition-all duration-500 ease-out ${ebGaramond.className}`}
             >
               Our Practice Areas
             </h2>
           </Link>
-          <div className="relative">
-            <div
-              ref={practiceAreasScrollRef}
-              className="overflow-x-auto scrollbar-hide select-none"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              <div className="flex space-x-4 sm:space-x-6 pb-4" style={{ width: "max-content" }}>
-                {practiceAreas.map((area) => (
-                  <Link key={area.id} href={`/practice-areas/${area.slug}`}>
-                    <Card className="border border-tertiary-200 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-72 sm:w-80 cursor-pointer bg-white">
-                      <CardContent className="p-0">
-                        <div className="w-full h-40 sm:h-48 bg-tertiary-300 rounded-t-lg"></div>
-                        <div className="p-4 sm:p-6">
-                          <h3
-                            className={`text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3 ${ebGaramond.className}`}
-                          >
-                            {area.title}
-                          </h3>
-                          <p className="text-text-secondary text-xs sm:text-sm leading-relaxed">{area.description}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </div>
+
+          <div
+            className={`grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 transition-all duration-1200 ease-out delay-500 ${
+              practiceAreasAnimation.isVisible
+                ? "opacity-100 transform translate-y-0"
+                : "opacity-0 transform translate-y-8"
+            }`}
+          >
+            {practiceAreaCategories.map((area) => (
+              <Link key={area.id} href={area.link}>
+                <Card className="bg-white border border-gray-200 shadow-lg cursor-pointer h-full">
+                  <CardContent className="p-0">
+                    <div className="w-full h-40 sm:h-48 bg-gray-300 rounded-t-lg"></div>
+                    <div className="p-4 sm:p-6">
+                      <h3
+                        className={`text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3 ${ebGaramond.className}`}
+                      >
+                        {area.title}
+                      </h3>
+                      <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-3">{area.description}</p>
+                      <p className="text-text-accent text-xs sm:text-sm font-medium">Read more ...</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Latest Updates Section */}
-      <section className="py-16 sm:py-20 bg-amber-50">
+      <section
+        ref={updatesAnimation.ref}
+        className={`py-16 sm:py-20 bg-amber-50 transition-all duration-1000 ease-out ${
+          updatesAnimation.isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-12"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-12 gap-4">
+          <div
+            className={`flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-12 gap-4 transition-all duration-1000 ease-out delay-300 ${
+              updatesAnimation.isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
+            }`}
+          >
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary ${ebGaramond.className}`}>
               Latest Updates
             </h2>
             <Link
               href="/insights"
-              className="text-text-accent hover:text-primary-700 hover:font-bold font-medium transition-all text-sm sm:text-base lg:text-lg"
+              className="text-text-accent hover:text-primary-700 hover:font-bold font-medium transition-all duration-500 ease-out text-sm sm:text-base lg:text-lg hover:underline"
             >
               More Updates...
             </Link>
           </div>
-          <div className="relative">
+          <div
+            className={`relative transition-all duration-1200 ease-out delay-500 ${
+              updatesAnimation.isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
+            }`}
+          >
             <div
               ref={updatesScrollRef}
               className="overflow-x-auto scrollbar-hide select-none"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               <div className="flex space-x-4 sm:space-x-6 pb-4" style={{ width: "max-content" }}>
-                {latestUpdates.map((update) => (
-                  <Card
-                    key={update.id}
-                    className="bg-white border border-tertiary-200 shadow-lg hover:shadow-xl transition-shadow flex-shrink-0 w-72 sm:w-80 cursor-pointer"
-                  >
-                    <CardContent className="p-0">
-                      <div className="w-full h-24 sm:h-32 bg-gray-100 rounded-t-lg border-b border-tertiary-200"></div>
-                      <div className="p-4 sm:p-6">
-                        <div className="text-xs text-text-muted mb-2">{update.date}</div>
-                        <h3
-                          className={`text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3 ${ebGaramond.className}`}
-                        >
-                          {update.title}
-                        </h3>
-                        <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
-                          {update.excerpt}
-                        </p>
-                        <Link
-                          href={`/insights/${update.slug}`}
-                          className="text-text-accent hover:text-primary-700 text-xs sm:text-sm font-medium transition-colors"
-                        >
-                          Read more...
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                {latestUpdates.map((update) => {
+                  const { day, month } = formatDate(update.date)
+                  return (
+                    <Card
+                      key={update.id}
+                      className="bg-white border border-tertiary-200 shadow-lg hover:shadow-xl transition-all duration-500 ease-out flex-shrink-0 w-72 sm:w-80 cursor-pointer group hover:scale-105 hover:-translate-y-2"
+                    >
+                      <CardContent className="p-0">
+                        <div className="w-full h-24 sm:h-32 bg-gray-100 rounded-t-lg border-b border-tertiary-200 relative">
+                          {/* Date overlay on photo */}
+                          <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded px-2 py-1 text-center transition-all duration-300 ease-out group-hover:bg-white group-hover:shadow-md">
+                            <div className="text-lg font-bold text-text-primary leading-none">{day}</div>
+                            <div className="text-xs text-text-secondary uppercase leading-none">{month}</div>
+                          </div>
+                        </div>
+                        <div className="p-4 sm:p-6">
+                          <h3
+                            className={`text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3 ${ebGaramond.className}`}
+                          >
+                            {update.title}
+                          </h3>
+                          {/* Excerpt shown only on hover */}
+                          <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out max-h-0 group-hover:max-h-20 overflow-hidden">
+                            {update.excerpt}
+                          </p>
+                          <Link
+                            href={`/insights/${update.slug}`}
+                            className="text-text-accent hover:text-primary-700 text-xs sm:text-sm font-medium transition-all duration-500 ease-out hover:underline"
+                          >
+                            Read more...
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
               </div>
             </div>
           </div>

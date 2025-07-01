@@ -95,7 +95,7 @@ export default function HeroCarousel() {
       {/* Images Container */}
       <div
         ref={containerRef}
-        className="flex transition-transform duration-500 ease-in-out h-full cursor-grab active:cursor-grabbing"
+        className="flex transition-transform duration-700 ease-out h-full cursor-grab active:cursor-grabbing"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => {
@@ -124,7 +124,7 @@ export default function HeroCarousel() {
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-primary rounded-full p-1.5 sm:p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-primary rounded-full p-1.5 sm:p-2 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out hover:scale-110"
         aria-label="Previous image"
       >
         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -132,7 +132,7 @@ export default function HeroCarousel() {
 
       <button
         onClick={goToNext}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-primary rounded-full p-1.5 sm:p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-primary rounded-full p-1.5 sm:p-2 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out hover:scale-110"
         aria-label="Next image"
       >
         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -144,8 +144,8 @@ export default function HeroCarousel() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-              index === currentSlide ? "bg-white scale-110" : "bg-white/50 hover:bg-white/75"
+            className={`w-2 h-2 rounded-full transition-all duration-500 ease-out cursor-pointer ${
+              index === currentSlide ? "bg-white scale-110" : "bg-white/50 hover:bg-white/75 hover:scale-105"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
