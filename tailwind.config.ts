@@ -1,20 +1,19 @@
 import type { Config } from "tailwindcss"
-import defaultConfig from "shadcn/ui/tailwind.config"
+import animatePlugin from "tailwindcss-animate"
 
 const config: Config = {
   darkMode: ["class"],
   content: [
-    ...defaultConfig.content,
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        inter: ["Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -31,7 +30,7 @@ const config: Config = {
           300: "#8dd1a8",
           400: "#57b67c",
           500: "#339e5a",
-          600: "#1f7a3f", // Main green
+          600: "#1f7a3f",
           700: "#1a6235",
           800: "#174f2c",
           900: "#144125",
@@ -97,15 +96,15 @@ const config: Config = {
           950: "#262626",
         },
         text: {
-          primary: "#0f172a", // Dark blue-gray
-          secondary: "#334155", // Medium blue-gray
-          tertiary: "#64748b", // Light blue-gray
-          muted: "#94a3b8", // Very light blue-gray
-          accent: "#1f7a3f", // Green
-          light: "#ffffff", // White
+          primary: "#0f172a",
+          secondary: "#334155",
+          tertiary: "#64748b",
+          muted: "#94a3b8",
+          accent: "#1f7a3f",
+          light: "#ffffff",
         },
         navbar: {
-          active: "#1D391F", // Specific green for active navbar items
+          active: "#1D391F",
         },
       },
       borderRadius: {
@@ -115,7 +114,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [...defaultConfig.plugins, require("tailwindcss-animate")],
+  plugins: [animatePlugin],
 }
 
 export default config
