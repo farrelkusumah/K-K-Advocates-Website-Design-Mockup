@@ -1,29 +1,32 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, X, LogOut } from "lucide-react"
-import { EB_Garamond } from "next/font/google"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X, LogOut } from "lucide-react";
+import { EB_Garamond } from "next/font/google";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-const ebGaramond = EB_Garamond({ subsets: ["latin"] })
+const ebGaramond = EB_Garamond({ subsets: ["latin"] });
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("kk_auth")
-    window.location.reload()
-  }
+    localStorage.removeItem("kk_auth");
+    window.location.reload();
+  };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
   const closeMenu = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
+
+  const pathname = usePathname();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
@@ -45,33 +48,99 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8 lg:space-x-12">
             <Link
               href="/"
-              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+              className={`relative group text-text-primary ${
+                pathname === "/about"
+                  ? "text-text-accent font-semibold"
+                  : "hover:text-text-accent"
+              } transition-colors font-medium text-sm lg:text-base`}
             >
               Home
+              <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-text-accent transform transition-transform duration-300 ease-out origin-left ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
             </Link>
             <Link
               href="/about"
-              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+              className={`relative group text-text-primary ${
+                pathname === "/about"
+                  ? "text-text-accent font-semibold"
+                  : "hover:text-text-accent"
+              } transition-colors font-medium text-sm lg:text-base`}
             >
               About
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-text-accent transform transition-transform duration-300 ease-out origin-left ${
+                  pathname === "/about"
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
+                }`}
+              />
             </Link>
             <Link
               href="/practice-areas"
-              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+              className={`relative group text-text-primary ${
+                pathname === "/practice-areas"
+                  ? "text-text-accent font-semibold"
+                  : "hover:text-text-accent"
+              } transition-colors font-medium text-sm lg:text-base`}
             >
               Practice Areas
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-text-accent transform transition-transform duration-300 ease-out origin-left ${
+                  pathname === "/practice-areas"
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
+                }`}
+              />
             </Link>
             <Link
-              href="/insights"
-              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+              href="/"
+              className={`relative group text-text-primary ${
+                pathname === "/insights"
+                  ? "text-text-accent font-semibold"
+                  : "hover:text-text-accent"
+              } transition-colors font-medium text-sm lg:text-base`}
             >
               Insights
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-text-accent transform transition-transform duration-300 ease-out origin-left ${
+                  pathname === "/insights"
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
+                }`}
+              />
             </Link>
-            <Link
-              href="/contact"
-              className="text-text-primary hover:text-text-accent transition-colors font-medium text-sm lg:text-base"
+            {/* <Link
+              href="/"
+              className={`relative group text-text-primary ${
+                pathname === "/contact"
+                  ? "text-text-accent font-semibold"
+                  : "hover:text-text-accent"
+              } transition-colors font-medium text-sm lg:text-base`}
             >
               Contact
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-text-accent transform transition-transform duration-300 ease-out origin-left ${
+                  pathname === "/contact"
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
+                }`}
+              />
+            </Link> */}
+            <Link
+              href="/"
+              className={`relative group text-text-primary ${
+                pathname === "/achievements"
+                  ? "text-text-accent font-semibold"
+                  : "hover:text-text-accent"
+              } transition-colors font-medium text-sm lg:text-base`}
+            >
+              Achievements
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 bg-text-accent transform transition-transform duration-300 ease-out origin-left ${
+                  pathname === "/achievements"
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
+                }`}
+              />
             </Link>
             <Button
               onClick={handleLogout}
@@ -160,5 +229,5 @@ export default function Navbar() {
         )}
       </div>
     </nav>
-  )
+  );
 }
